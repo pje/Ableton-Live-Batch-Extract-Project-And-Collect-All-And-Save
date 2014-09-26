@@ -73,17 +73,6 @@
 					<key>promptMessage</key>
 					<string>Choose a Project Directory:</string>
 				</dict>
-				<key>ActionRuntimeParameters</key>
-				<dict>
-					<key>granularity</key>
-					<integer>1</integer>
-					<key>multipleSelection</key>
-					<true/>
-					<key>promptMessage</key>
-					<string>Choose a Project Directory:</string>
-					<key>temporary items path</key>
-					<string>/var/folders/31/3cg642c90bs_lnqksq293f0r0000gp/T/3AD8E489-3577-4AF4-A29A-2B408045823D/1/com.apple.Automator.AskForFinderItems</string>
-				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.AskForFinderItems</string>
 				<key>CFBundleVersion</key>
@@ -176,7 +165,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>480.500000:941.000000</string>
+				<string>480.500000:1089.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Ask for Finder Items.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -228,13 +217,6 @@
 					<key>recurse</key>
 					<false/>
 				</dict>
-				<key>ActionRuntimeParameters</key>
-				<dict>
-					<key>recurse</key>
-					<false/>
-					<key>temporary items path</key>
-					<string>/var/folders/31/3cg642c90bs_lnqksq293f0r0000gp/T/3AD8E489-3577-4AF4-A29A-2B408045823D/1/com.apple.Automator.GetFolderContents</string>
-				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.GetFolderContents</string>
 				<key>CFBundleVersion</key>
@@ -283,7 +265,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>480.500000:786.000000</string>
+				<string>480.500000:934.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Get Folder Contents.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -348,21 +330,6 @@
 					<string>/bin/bash</string>
 					<key>source</key>
 					<string></string>
-				</dict>
-				<key>ActionRuntimeParameters</key>
-				<dict>
-					<key>COMMAND_STRING</key>
-					<string>cat | egrep '.als$'</string>
-					<key>CheckedForUserDefaultShell</key>
-					<true/>
-					<key>inputMethod</key>
-					<integer>0</integer>
-					<key>shell</key>
-					<string>/bin/bash</string>
-					<key>source</key>
-					<string></string>
-					<key>temporary items path</key>
-					<string>/var/folders/31/3cg642c90bs_lnqksq293f0r0000gp/T/3AD8E489-3577-4AF4-A29A-2B408045823D/1/com.apple.RunShellScript</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.RunShellScript</string>
@@ -467,7 +434,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>480.500000:686.000000</string>
+				<string>480.500000:834.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
@@ -518,59 +485,26 @@
 					<string>on run {input, parameters}
 	repeat with live_set in input
 		do shell script "echo " &amp; quoted form of live_set
-		tell application "Ableton Live 9 Suite" to open POSIX path of live_set
-		tell application "System Events" to tell process "Live"
-			set frontmost to true
 
-			tell menu bar item "File" of menu bar 1
-				click
-				click menu item "Save Live Set As..." of menu 1
-				tell application "System Events" to key code 126 using command down -- up
-				tell application "System Events" to key code 48 using shift down -- tab
-				tell application "System Events" to key code 49 -- space
-
-				with timeout of 10 * minutes seconds
+		with timeout of 20 * minutes seconds
+			tell application "Ableton Live 9 Suite" to open POSIX path of live_set
+			tell application "System Events" to tell process "Live"
+				set frontmost to true
+				tell menu bar item "File" of menu bar 1
+					click
+					click menu item "Save Live Set As..." of menu 1
+					tell application "System Events" to key code 126 using command down -- up
+					tell application "System Events" to key code 48 using shift down -- tab
+					tell application "System Events" to key code 49 -- space
 					click menu item "Collect All and Save" of menu 1
 					tell application "System Events" to key code 36 -- return
-				end timeout
+				end tell
 			end tell
-		end tell
+		end timeout
 	end repeat
-
 	return input
 end run
 </string>
-				</dict>
-				<key>ActionRuntimeParameters</key>
-				<dict>
-					<key>source</key>
-					<string>on run {input, parameters}
-	repeat with live_set in input
-		do shell script "echo " &amp; quoted form of live_set
-		tell application "Ableton Live 9 Suite" to open POSIX path of live_set
-		tell application "System Events" to tell process "Live"
-			set frontmost to true
-
-			tell menu bar item "File" of menu bar 1
-				click
-				click menu item "Save Live Set As..." of menu 1
-				tell application "System Events" to key code 126 using command down -- up
-				tell application "System Events" to key code 48 using shift down -- tab
-				tell application "System Events" to key code 49 -- space
-
-				with timeout of 10 * minutes seconds
-					click menu item "Collect All and Save" of menu 1
-					tell application "System Events" to key code 36 -- return
-				end timeout
-			end tell
-		end tell
-	end repeat
-
-	return input
-end run
-</string>
-					<key>temporary items path</key>
-					<string>/var/folders/31/3cg642c90bs_lnqksq293f0r0000gp/T/3AD8E489-3577-4AF4-A29A-2B408045823D/1/com.apple.Automator.RunScript</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
@@ -624,7 +558,7 @@ end run</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>480.500000:503.000000</string>
+				<string>480.500000:651.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
@@ -634,26 +568,26 @@ end run</string>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>75EC10C6-E3EE-4C4B-8EA5-8E51239F9B42</key>
-		<dict>
-			<key>from</key>
-			<string>7A3C9DB8-214C-4039-AEBD-E65D748989E7 - 7A3C9DB8-214C-4039-AEBD-E65D748989E7</string>
-			<key>to</key>
-			<string>8A2CE281-C8B7-4628-B47B-17A8892B9693 - 8A2CE281-C8B7-4628-B47B-17A8892B9693</string>
-		</dict>
-		<key>D229C386-1F09-4F64-B8C4-6EA1C88AF316</key>
-		<dict>
-			<key>from</key>
-			<string>8A2CE281-C8B7-4628-B47B-17A8892B9693 - 8A2CE281-C8B7-4628-B47B-17A8892B9693</string>
-			<key>to</key>
-			<string>20A4337D-1377-4FC8-96AB-8E9D69A02A6C - 20A4337D-1377-4FC8-96AB-8E9D69A02A6C</string>
-		</dict>
-		<key>FBFE2A60-8BA0-4085-AFD4-55633437C74A</key>
+		<key>0CC68F6E-6294-4A2F-802E-138BD0F13D88</key>
 		<dict>
 			<key>from</key>
 			<string>20A4337D-1377-4FC8-96AB-8E9D69A02A6C - 20A4337D-1377-4FC8-96AB-8E9D69A02A6C</string>
 			<key>to</key>
 			<string>CC5EE997-8EDE-4EA2-99C8-2D4E2A661E50 - CC5EE997-8EDE-4EA2-99C8-2D4E2A661E50</string>
+		</dict>
+		<key>505E03FF-C222-4303-9B4B-B10A7A709D14</key>
+		<dict>
+			<key>from</key>
+			<string>8A2CE281-C8B7-4628-B47B-17A8892B9693 - 8A2CE281-C8B7-4628-B47B-17A8892B9693</string>
+			<key>to</key>
+			<string>20A4337D-1377-4FC8-96AB-8E9D69A02A6C - 20A4337D-1377-4FC8-96AB-8E9D69A02A6C</string>
+		</dict>
+		<key>B83FD8A6-8DBE-45BC-A66B-ED7FCA0C5546</key>
+		<dict>
+			<key>from</key>
+			<string>7A3C9DB8-214C-4039-AEBD-E65D748989E7 - 7A3C9DB8-214C-4039-AEBD-E65D748989E7</string>
+			<key>to</key>
+			<string>8A2CE281-C8B7-4628-B47B-17A8892B9693 - 8A2CE281-C8B7-4628-B47B-17A8892B9693</string>
 		</dict>
 	</dict>
 	<key>workflowMetaData</key>
